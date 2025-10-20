@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Fundação Exemplo — Doe Esperança</title>
+  <meta name="description" content="Site de caridade — arrecadação, voluntariado e transparência." />
+
+  <!-- Estilos embutidos (fácil de customizar) -->
+  <style>
+    /* Reset moderno mínimo */
+    :root{
+      --bg: #0f1724;
+      --surface: #0b1220;
+      --card: #0f1724;
+      --muted:#9aa4b2;
+      --accent: #06b6d4; /* cyan-500 */
+      --accent-2: #0ea5e9;
+      --glass: rgba(255,255,255,0.04);
+      --radius:16px;
+      --max-width:1100px;
+      --gap:18px;
+      --txt:#e6eef6;
+      --soft:#c7d2da;
+      --success:#10b981;
+      --danger:#ef4444;
+      --glass-2: rgba(255,255,255,0.02);
+      font-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;background:linear-gradient(180deg,#061322 0%, #071428 60%);color:var(--txt);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    img{max-width:100%;height:auto;display:block}
+    a{color:var(--accent);text-decoration:none}
+
+    /* Layout */
+    header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(6,19,34,0.6), rgba(6,19,34,0.35));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.02)}
+    .nav{max-width:var(--max-width);margin:0 auto;padding:16px;display:flex;align-items:center;gap:12px;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo strong{font-size:16px}
+    .logo small{display:block;color:var(--muted);font-size:12px}
+
+    .menu{display:flex;gap:10px;align-items:center}
+    .menu a{padding:8px 10px;border-radius:10px;color:var(--soft);font-weight:600;font-size:14px}
+    .menu a:hover{background:var(--glass)}
+
+    .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#04202a;padding:10px 14px;border-radius:12px;border:0;cursor:pointer;font-weight:700;box-shadow:0 8px 30px rgba(6,18,30,0.6);letter-spacing:0.2px}
+    .secondary{background:transparent;border:1px solid rgba(255,255,255,0.03);padding:10px 14px;border-radius:12px;color:var(--soft)}
+
+    .container{max-width:var(--max-width);margin:36px auto;padding:0 20px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr;gap:var(--gap);align-items:start}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:28px;border-radius:18px;box-shadow:0 12px 40px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
+    .kicker{display:inline-block;background:rgba(6,182,212,0.12);color:var(--accent);padding:6px 10px;border-radius:999px;font-weight:800;font-size:13px}
+    h1{font-size:30px;line-height:1.06;margin:12px 0;color:var(--txt);letter-spacing:-0.2px}
+    p.lead{color:var(--muted);margin:0 0 18px;font-size:15px}
+
+    .stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .stat{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px 14px;border-radius:12px;min-width:120px}
+    .stat strong{display:block;font-size:18px}
+    .stat .muted{font-size:13px;color:var(--muted)}
+
+    /* Card / grids */
+    section{margin:28px 0}
+    .grid-3{display:grid;grid-template-columns:1fr;gap:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:14px;border:1px solid var(--glass-2);box-shadow:0 8px 28px rgba(3,7,18,0.6)}
+    .card h3{margin:6px 0;color:var(--txt)}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* Donate banner */
+    .donate-banner{display:flex;align-items:center;justify-content:space-between;padding:18px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#041018}
+
+    /* Forms */
+    form{display:grid;gap:10px}
+    input,textarea,select{padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--txt);font-size:15px}
+    textarea{min-height:120px;resize:vertical}
+    input::placeholder, textarea::placeholder{color:rgba(255,255,255,0.35)}
+    .pill{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.03);font-size:13px}
+
+    /* Footer */
+    footer{padding:28px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02);margin-top:40px}
+
+    /* Responsive */
+    @media (min-width:900px){
+      .hero{grid-template-columns:1fr 420px}
+      .grid-3{grid-template-columns:repeat(3,1fr)}
+      .menu a{font-size:15px}
+    }
+
+    @media (max-width:899px){
+      .grid-3{grid-template-columns:1fr}
+      .nav{padding:12px}
+    }
+
+    /* Small interactions */
+    button:active{transform:translateY(1px)}
+    .card:hover{transform:translateY(-6px);transition:transform .28s cubic-bezier(.2,.9,.3,1)}
+    .btn{transition:transform .18s ease,box-shadow .18s ease}
+
+    /* Accessibility focus */
+    :focus{outline:3px solid rgba(6,182,212,0.18);outline-offset:3px}
+
+    /* utility */
+    .center{text-align:center}
+
+    /* subtle entrance animation */
+    @keyframes floatIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .hero-card, .card{animation:floatIn .6s ease both}
+
+    /* Tiny print-friendly tweaks */
+    @media print{header, .btn, .menu{display:none}body{background:#fff;color:#000}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo">
+        <!-- simple accessible svg logo -->
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="var(--accent)"/><path d="M8 12c1.333-2 4-2 5 0 1-2 3-2 4 0" stroke="#fff" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
+        <div>
+          <strong>Doe Esperança</strong><br>
+          <small class="muted">Organização Comunitária</small>
+        </div>
+      </div>
+
+      <nav class="menu" aria-label="Menu principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#voluntario">Voluntarie-se</a>
+        <a href="#contato">Contato</a>
+        <button class="btn" onclick="scrollToSection('doar')">Doar</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <span class="kicker">Apoie uma causa</span>
+        <h1>Transformando vidas com ações locais e transparência.</h1>
+        <p class="lead">Somos uma organização sem fins lucrativos focada em apoiar famílias em situação de vulnerabilidade. Doe, participe como voluntário ou compartilhe nossos projetos — cada ação conta.</p>
+
+        <div class="stats">
+          <div class="stat"><strong>R$ 42.000</strong><div class="muted">Arrecadado este ano</div></div>
+          <div class="stat"><strong>1.200</strong><div class="muted">Pessoas impactadas</div></div>
+          <div class="stat"><strong>36</strong><div class="muted">Projetos concluídos</div></div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:18px">
+          <button class="btn" onclick="scrollToSection('doar')">Doe agora</button>
+          <button class="secondary" onclick="scrollToSection('voluntario')">Quero voluntariar</button>
+        </div>
+
+        <p style="margin-top:18px;font-size:13px;color:var(--muted)"><strong>Dica:</strong> substitua as métricas acima por dados reais e carregue imagens de impacto na seção de projetos.</p>
+      </div>
+
+      <!-- Right column: donation + news -->
+      <aside>
+        <div class="card">
+          <div class="donate-banner" role="region" aria-label="Banner de doação">
+            <div>
+              <div class="pill">Ajude hoje</div>
+              <h3 style="margin:8px 0">Doação única ou mensal</h3>
+              <p class="muted">Sua doação garante alimentação, atendimento e educação.</p>
+            </div>
+            <div style="text-align:right">
+              <button class="btn" onclick="openDonateForm()">Doar</button>
+            </div>
+          </div>
+
+          <hr style="margin:14px 0;border:none;border-top:1px solid rgba(15,23,42,0.04)" />
+
+          <h4>Últimas notícias</h4>
+          <ul class="muted" style="padding-left:18px;margin:8px 0">
+            <li>Entrega de cestas — 21 set 2025</li>
+            <li>Campanha escolar — maio 2025</li>
+            <li>Maratona solidária — previsão Jun 2026</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre">
+      <div class="card">
+        <h2>Sobre nós</h2>
+        <p class="muted">Nós conectamos doadores, voluntários e comunidades para projetos de curto e longo prazo. Trabalhamos com transparência: relatórios trimestrais, fotos de entregas e prestação de contas pública.</p>
+        <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+          <div class="pill">Transparência</div>
+          <div class="pill">Impacto Local</div>
+          <div class="pill">Educação</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projetos -->
+    <section id="projetos">
+      <h2>Projetos</h2>
+      <div class="grid-3">
+        <article class="card" aria-labelledby="p1">
+          <h3 id="p1">Cesta Básica</h3>
+          <p class="muted">Distribuição mensal de mantimentos para famílias em vulnerabilidade.</p>
+          <p style="margin-top:8px"><strong>Meta:</strong> R$ 10.000</p>
+          <button class="secondary" onclick="openDonateForm('cesta')">Apoiar projeto</button>
+        </article>
+
+        <article class="card" aria-labelledby="p2">
+          <h3 id="p2">Centro de Reforço Escolar</h3>
+          <p class="muted">Aulas de reforço e material didático para crianças da comunidade.</p>
+          <p style="margin-top:8px"><strong>Voluntários:</strong> 12</p>
+          <button class="secondary" onclick="scrollToSection('voluntario')">Ser voluntário</button>
+        </article>
+
+        <article class="card" aria-labelledby="p3">
+          <h3 id="p3">Saúde Comunitária</h3>
+          <p class="muted">Campanhas de vacinação e orientação preventiva em bairros com pouca cobertura.</p>
+          <button class="secondary" onclick="openDonateForm('saude')">Contribuir</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- Voluntariado -->
+    <section id="voluntario">
+      <div class="card">
+        <h2>Voluntarie-se</h2>
+        <p class="muted">Junte-se à nossa rede de voluntários. Preencha o formulário abaixo para receber oportunidades por e-mail.</p>
+        <form id="volunteer-form" onsubmit="event.preventDefault();submitVolunteer()" aria-label="Formulário de voluntariado">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <input type="text" id="vname" placeholder="Nome completo" required aria-label="nome" />
+            <input type="email" id="vemail" placeholder="E-mail" required aria-label="e-mail" />
+          </div>
+          <select id="vavailability" required>
+            <option value="">Disponibilidade</option>
+            <option>Fins de semana</option>
+            <option>Durante a semana</option>
+            <option>Eventual</option>
+          </select>
+          <textarea id="vmessage" placeholder="Conte-nos algo sobre você (habilidades, experiências)" aria-label="mensagem"></textarea>
+          <div style="display:flex;gap:8px">
+            <button class="btn" type="submit">Enviar</button>
+            <button class="secondary" type="button" onclick="document.getElementById('volunteer-form').reset()">Limpar</button>
+          </div>
+          <div id="volunteer-feedback" class="muted" style="margin-top:8px"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato">
+      <div class="card">
+        <h2>Contato</h2>
+        <p class="muted">Dúvidas sobre doações, eventos ou prestação de contas? Envie uma mensagem.</p>
+        <form id="contact-form" onsubmit="event.preventDefault();submitContact()">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <input type="text" id="name" placeholder="Seu nome" required />
+            <input type="email" id="email" placeholder="Seu e-mail" required />
+          </div>
+          <input id="subject" placeholder="Assunto" />
+          <textarea id="message" placeholder="Mensagem" required></textarea>
+          <div style="display:flex;gap:8px">
+            <button class="btn" type="submit">Enviar mensagem</button>
+            <button class="secondary" type="button" onclick="document.getElementById('contact-form').reset()">Limpar</button>
+          </div>
+          <div id="contact-feedback" class="muted" style="margin-top:8px"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Doação (form modal simplificado) -->
+    <section id="doar">
+      <div class="card">
+        <h2>Doar</h2>
+        <p class="muted">Escolha um valor e forma de pagamento. Este formulário é um mockup — integre com sua plataforma de pagamento (PagSeguro, PayPal, Stripe, Pagar.me, Pix) para processar transações reais.</p>
+        <form id="donate-form" onsubmit="event.preventDefault();submitDonate()">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button type="button" class="pill" onclick="setAmount(25)">R$25</button>
+            <button type="button" class="pill" onclick="setAmount(50)">R$50</button>
+            <button type="button" class="pill" onclick="setAmount(100)">R$100</button>
+            <input type="number" id="donate-amount" placeholder="Outro valor (R$)" min="1" style="width:160px" required />
+          </div>
+
+          <select id="donate-frequency">
+            <option value="one">Doação única</option>
+            <option value="monthly">Mensal</option>
+          </select>
+
+          <input id="donor-name" placeholder="Nome do doador" required />
+          <input id="donor-email" type="email" placeholder="E-mail" required />
+
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn" type="submit">Contribuir</button>
+            <button class="secondary" type="button" onclick="document.getElementById('donate-form').reset()">Cancelar</button>
+          </div>
+
+          <div id="donate-feedback" class="muted" style="margin-top:8px"></div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div style="max-width:var(--max-width);margin:0 auto;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+        <div>
+          <strong>Doe Esperança</strong><br>
+          <small class="muted">CNPJ: 00.000.000/0000-00 • Rua Exemplo, 100 — Cidade</small>
+        </div>
+        <div class="muted">© <span id="year"></span> — Todos os direitos reservados</div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Scripts simples para comportamento e validação (mock) -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    function setAmount(v){
+      document.getElementById('donate-amount').value = v;
+    }
+
+    function openDonateForm(project){
+      if(project){
+        document.getElementById('donate-feedback').textContent = 'Você está apoiando: '+project;
+        document.getElementById('donate-amount').focus();
+      }
+      scrollToSection('doar');
+    }
+
+    // Simple client-side handlers (mock). Replace AJAX/integração com backend.
+    function submitVolunteer(){
+      const name = document.getElementById('vname').value.trim();
+      const email = document.getElementById('vemail').value.trim();
+      if(!name||!email){
+        document.getElementById('volunteer-feedback').textContent = 'Preencha nome e e-mail.'; return;
+      }
+      // Simula envio
+      document.getElementById('volunteer-feedback').textContent = 'Obrigado '+name+' — em breve enviaremos oportunidades por e-mail.';
+      document.getElementById('volunteer-form').reset();
+    }
+
+    function submitContact(){
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if(!name||!email||!message){
+        document.getElementById('contact-feedback').textContent = 'Preencha os campos obrigatórios.'; return;
+      }
+      document.getElementById('contact-feedback').textContent = 'Mensagem enviada — responderemos em até 5 dias úteis.';
+      document.getElementById('contact-form').reset();
+    }
+
+    function submitDonate(){
+      const value = parseFloat(document.getElementById('donate-amount').value);
+      const name = document.getElementById('donor-name').value.trim();
+      const email = document.getElementById('donor-email').value.trim();
+      if(isNaN(value) || value <= 0){ document.getElementById('donate-feedback').textContent = 'Informe um valor válido.'; return; }
+      if(!name||!email){ document.getElementById('donate-feedback').textContent = 'Preencha nome e e-mail.'; return; }
+
+      // MOCK: aqui você chamaria sua API de pagamentos (ex: criar pagamento Pix / checkout Stripe)
+      document.getElementById('donate-feedback').textContent = 'Obrigado '+name+'! Simulamos a doação de R$ '+value.toFixed(2)+'.';
+      document.getElementById('donate-form').reset();
+    }
+
+    // small accessibility improvement: enable keyboard focus outlines only when keyboard used
+    (function(){
+      function handleFirstTab(e){
+        if(e.key === 'Tab') document.body.classList.add('user-is-tabbing');
+      }
+      window.addEventListener('keydown', handleFirstTab);
+    })();
+  </script>
+</body>
+</html>
