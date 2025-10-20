@@ -1,0 +1,16 @@
+<!-- Sempre defina idioma -->
+<html lang="pt-BR">
+
+<!-- Use alt em todas as imagens -->
+<img src="img/doacao.jpg" alt="Pessoa recebendo doação de alimentos">
+
+<!-- Títulos em ordem sem pular níveis -->
+<h1>Sobre a ONG</h1>
+<h2>Projetos Ativos</h2>
+
+<!-- Labels conectadas a inputs -->
+<label for="email">E-mail:</label>
+<input id="email" type="email" placeholder="Digite seu e-mail">
+
+<!-- Elementos com foco -->
+<a href="#contato" class="botao" tabindex="0">Entre em contato</a>
