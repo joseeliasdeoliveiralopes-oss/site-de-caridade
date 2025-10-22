@@ -1,5 +1,3 @@
-**descrição profissional e inspiradora** que você pode usar no seu projeto, repositório GitHub ou página inicial do site de caridade 👇
-
 ---
 
 ### 🌍 **Descrição do Projeto — Site de Caridade**
