@@ -1,0 +1,11 @@
+{
+  "name": "site-caridade",
+  "version": "1.0.0",
+  "description": "Site de caridade desenvolvido com HTML5, CSS3 e JavaScript.",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server"
+  },
+  "author": "José Elias",
+  "license": "MIT"
+}
